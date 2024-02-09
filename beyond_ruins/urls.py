@@ -6,7 +6,7 @@ from rest_framework import routers
 from backend_br.views import *
 
 router = routers.DefaultRouter()
-router.register(f'Article', ArticleViewSet)
+router.register(f'Posts', PostsViewSet, basename='posts')
 print(router.urls)
 
 urlpatterns = [

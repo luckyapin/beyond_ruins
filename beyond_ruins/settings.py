@@ -54,7 +54,22 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "https://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://localhost:3000",
+]
+
 ROOT_URLCONF = 'beyond_ruins.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
+
+CORS_ORIGIN_ALLOW_ANY = True
 
 TEMPLATES = [
     {
@@ -127,6 +142,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-]

@@ -5,5 +5,5 @@ from .models import *
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
+        model = Posts
         fields = "__all__"
