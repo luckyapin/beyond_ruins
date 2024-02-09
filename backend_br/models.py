@@ -7,11 +7,16 @@ class User(models.Model):
     gender = models.CharField(max_length=25)
     registrationDate = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.userId.username
+
 
 class Categories(models.Model):
     name = models.CharField(max_length=100)
     color = models.TextField()
 
+    def __str__(self):
+        return self.name
 
 class Posts(models.Model):
     title = models.CharField(max_length=100)
@@ -20,6 +25,8 @@ class Posts(models.Model):
     updateTime = models.DateTimeField(auto_now=True)
     userId = models.ForeignKey('User', on_delete=models.PROTECT)
     categoryId = models.ForeignKey('Categories', on_delete=models.PROTECT, null=True)
+    def __str__(self):
+        return self.title
 
 
 class Comments(models.Model):
@@ -27,5 +34,7 @@ class Comments(models.Model):
     creationTime = models.DateTimeField(auto_now_add=True)
     userId = models.ForeignKey('User', on_delete=models.PROTECT)
     postId = models.ForeignKey('Posts', on_delete=models.PROTECT)
+    def __str__(self):
+        return self.commentText
 
 
