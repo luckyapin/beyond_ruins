@@ -36,6 +36,8 @@ class PostsViewSet(mixins.CreateModelMixin,
             'color': post[0].categoryId.color,
         })
 
+
+
 class UserViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
@@ -68,4 +70,19 @@ class UserViewSet(mixins.CreateModelMixin,
                        }
         return Response(j)
 
+class CategoriesViewSet(mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.ListModelMixin,
+                  GenericViewSet):
+    queryset = Categories.objects.all()
+    serializer_class = UserSerializer
 
+
+class CommentsViewSet(mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.ListModelMixin,
+                  GenericViewSet):
+    queryset = Comments.objects.all()
+    serializer_class = UserSerializer
