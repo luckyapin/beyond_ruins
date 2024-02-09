@@ -22,5 +22,6 @@ class PostsViewSet(mixins.CreateModelMixin,
         for i in coms:
             j[i.pk] = {'commentText': i.commentText,
                        'creationTime': i.creationTime,
-                       'userId': i.userId.pk}
+                       'userId': str(i.userId.pk),
+                       'postId': pk}
         return Response(j)
