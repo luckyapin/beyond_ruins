@@ -71,18 +71,18 @@ class UserViewSet(mixins.CreateModelMixin,
         return Response(j)
 
 class CategoriesViewSet(mixins.CreateModelMixin,
-                  mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin,
-                  mixins.ListModelMixin,
-                  GenericViewSet):
+                        mixins.RetrieveModelMixin,
+                        mixins.UpdateModelMixin,
+                        mixins.ListModelMixin,
+                        GenericViewSet):
     queryset = Categories.objects.all()
     serializer_class = UserSerializer
 
 
 class CommentsViewSet(mixins.CreateModelMixin,
-                  mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin,
-                  mixins.ListModelMixin,
-                  GenericViewSet):
+                      mixins.RetrieveModelMixin,
+                      mixins.UpdateModelMixin,
+                      mixins.ListModelMixin,
+                      GenericViewSet):
     queryset = Comments.objects.all()
     serializer_class = UserSerializer
