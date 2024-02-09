@@ -1,10 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
 class User(models.Model):
-    login = models.CharField(max_length=25)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)
+    userId = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     gender = models.CharField(max_length=25)
     registrationDate = models.DateTimeField(auto_now_add=True)
 

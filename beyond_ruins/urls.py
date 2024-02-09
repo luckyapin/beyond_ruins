@@ -5,11 +5,13 @@ from rest_framework import routers
 
 from backend_br.views import *
 
-router = routers.DefaultRouter()
-router.register(f'Posts', PostsViewSet, basename='posts')
-print(router.urls)
+router_posts = routers.DefaultRouter()
+router_posts.register(f'Posts', PostsViewSet, basename='posts')
+router_user = routers.DefaultRouter()
+router_user.register(f'User', UserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('api/v1/', include(router_posts.urls)),
+    path('api/v1/', include(router_user.urls)),
 ]
