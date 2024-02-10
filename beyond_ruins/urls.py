@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import routers
 
 from backend_br.views import *
@@ -23,4 +23,7 @@ urlpatterns = [
     path('api/v1/', include(router_user.urls)),
     path('api/v1/', include(router_categories.urls)),
     path('api/v1/', include(router_comments.urls)),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/auth/', include('djoser.urls')),
 ]

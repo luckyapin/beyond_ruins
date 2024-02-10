@@ -1,14 +1,6 @@
 from django.contrib.auth import get_user_model
+
 from django.db import models
-
-
-class User(models.Model):
-    userId = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
-    gender = models.CharField(max_length=25)
-    registrationDate = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.userId.username
 
 
 class Categories(models.Model):
@@ -18,13 +10,15 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
+
 class Posts(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
     creationTime = models.DateTimeField(auto_now_add=True)
     updateTime = models.DateTimeField(auto_now=True)
-    userId = models.ForeignKey('User', on_delete=models.PROTECT)
+    userId = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     categoryId = models.ForeignKey('Categories', on_delete=models.PROTECT, null=True)
+
     def __str__(self):
         return self.title
 
@@ -32,8 +26,9 @@ class Posts(models.Model):
 class Comments(models.Model):
     commentText = models.TextField()
     creationTime = models.DateTimeField(auto_now_add=True)
-    userId = models.ForeignKey('User', on_delete=models.PROTECT)
+    userId = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     postId = models.ForeignKey('Posts', on_delete=models.PROTECT)
+
     def __str__(self):
         return self.commentText
 

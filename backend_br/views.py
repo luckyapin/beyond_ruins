@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from rest_framework import mixins
+from rest_framework import mixins, permissions
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.exceptions import PermissionDenied
 from .models import *
 from .serializer import *
+from .permissions import *
 # Create your views here.
 
 
@@ -15,6 +18,7 @@ class PostsViewSet(mixins.CreateModelMixin,
                    GenericViewSet):
     queryset = Posts.objects.all()
     serializer_class = PostsSerializer
+    permission_classes = (MyPermission, )
     @action(methods=['get'], detail=True)
     def comments(self, request, pk):
         coms = Comments.objects.filter(postId=pk)
@@ -37,24 +41,14 @@ class PostsViewSet(mixins.CreateModelMixin,
         })
 
 
-
 class UserViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.ListModelMixin,
                   GenericViewSet):
-    queryset = User.objects.all()
+    queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-
-    @action(methods=['get'], detail=True)
-    def login(self, request, pk):
-        user = User.objects.filter(pk=pk)[0]
-        return Response({
-            'login': user.userId.username,
-            'gender': user.gender,
-            'registrationDate': user.registrationDate
-        })
-
+    permission_classes = (UserPermission,)
     @action(methods=['get'], detail=True)
     def post(self, request, pk):
         posts = Posts.objects.filter(userId=pk)
@@ -70,6 +64,7 @@ class UserViewSet(mixins.CreateModelMixin,
                        }
         return Response(j)
 
+
 class CategoriesViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
@@ -77,6 +72,7 @@ class CategoriesViewSet(mixins.CreateModelMixin,
                         GenericViewSet):
     queryset = Categories.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsAdminUser,)
 
 
 class CommentsViewSet(mixins.CreateModelMixin,
@@ -86,3 +82,4 @@ class CommentsViewSet(mixins.CreateModelMixin,
                       GenericViewSet):
     queryset = Comments.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (MyPermission,)
