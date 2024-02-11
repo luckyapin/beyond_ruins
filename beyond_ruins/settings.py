@@ -66,6 +66,8 @@ CORS_ALLOWED_ORIGINS = [
 ROOT_URLCONF = 'beyond_ruins.urls'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'Page_size': 10,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
