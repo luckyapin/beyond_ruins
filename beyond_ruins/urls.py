@@ -26,6 +26,6 @@ urlpatterns = [
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/auth/', include('djoser.urls')),
-    path('api/token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_blacklist'),
+    path('api/v1/token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
