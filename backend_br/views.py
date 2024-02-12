@@ -79,7 +79,7 @@ class CategoriesViewSet(mixins.CreateModelMixin,
                         GenericViewSet):
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (MyPermission,)
 
 # Все основные запросы к комментариям
 class CommentsViewSet(mixins.CreateModelMixin,

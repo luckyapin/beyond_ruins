@@ -48,6 +48,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 # Откуда можно принимать запросы
+
+#CORS_ORIGIN_ALLOW_ANY = True
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://127.0.0.1:3000",
@@ -113,7 +115,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-#CORS_ORIGIN_ALLOW_ANY = True
+
 
 TEMPLATES = [
     {
