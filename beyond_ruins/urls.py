@@ -13,10 +13,10 @@ router_user = routers.DefaultRouter()
 router_user.register(f'User', UserViewSet, basename='user')
 
 router_categories = routers.DefaultRouter()
-router_categories.register(f'categories', UserViewSet, basename='categories')
+router_categories.register(f'categories', CategoriesViewSet, basename='categories')
 
 router_comments = routers.DefaultRouter()
-router_comments.register(f'comments', UserViewSet, basename='comments')
+router_comments.register(f'comments', CommentsViewSet, basename='comments')
 
 # Список всех путей
 urlpatterns = [
