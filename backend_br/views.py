@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.exceptions import PermissionDenied
-from .models import *
+from backend_br.models import *
 from .serializer import *
 from .permissions import *
 # Create your views here.

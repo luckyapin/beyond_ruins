@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import *
+from backend_br.models import *
 
 # Сериализаторы, которые преобразуют переменные python в json и обратно
 class PostsSerializer(serializers.ModelSerializer):

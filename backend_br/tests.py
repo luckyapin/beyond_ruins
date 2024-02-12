@@ -2,15 +2,13 @@ from rest_framework.test import APITestCase, APIRequestFactory
 from .views import PostsViewSet
 from django.urls import reverse
 from rest_framework import status
+from beyond_ruins_project import urls
 
 
 class PostViewSetTestCase(APITestCase):
     def setUp(self):
-        self.factory = APIRequestFactory
-        self.view = PostsViewSet.as_view()
-        self.url = reverse('posts')
+        self.url = reverse('posts-list')
 
     def test_view_posts(self):
-        request = self.factory.get(self.url)
-        response = self.view(request)
+        response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
