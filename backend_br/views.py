@@ -11,6 +11,7 @@ from .permissions import *
 # Create your views here.
 
 
+# Обработка всех основных запросов + вывод всех комментариев и категорий у 1 поста
 class PostsViewSet(mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin,
                    mixins.UpdateModelMixin,
@@ -19,7 +20,8 @@ class PostsViewSet(mixins.CreateModelMixin,
     queryset = Posts.objects.all()
     serializer_class = PostsSerializer
     permission_classes = (MyPermission, )
-    @action(methods=['get'], detail=True)
+
+    @action(methods=['get'], detail=True)  # Вывод комментариев к посту
     def comments(self, request, pk):
         coms = Comments.objects.filter(postId=pk)
         j = {}
@@ -32,7 +34,7 @@ class PostsViewSet(mixins.CreateModelMixin,
                        }
         return Response(j)
 
-    @action(methods=['get'], detail=True)
+    @action(methods=['get'], detail=True)  # Вывод категории поста
     def category(self, request, pk):
         post = Posts.objects.filter(pk=pk)
         return Response({
@@ -40,7 +42,7 @@ class PostsViewSet(mixins.CreateModelMixin,
             'color': post[0].categoryId.color,
         })
 
-
+# Обработка всех основных запросов к User + вывод всех постов 1 пользователя
 class UserViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
@@ -49,8 +51,10 @@ class UserViewSet(mixins.CreateModelMixin,
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = (UserPermission,)
-    @action(methods=['get'], detail=True)
+
+    @action(methods=['get'], detail=True)  # Вывод всех постов пользователя
     def post(self, request, pk):
+
         posts = Posts.objects.filter(userId=pk)
         j = {}
         for i in posts:
@@ -64,7 +68,11 @@ class UserViewSet(mixins.CreateModelMixin,
                        }
         return Response(j)
 
+    @action(methods=['get'], detail=False)  # Профиль, отправившего токен
+    def profile(self, request):
+       return Response(request.user.pk)
 
+# Все основные запросы к Категориям
 class CategoriesViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
@@ -74,7 +82,7 @@ class CategoriesViewSet(mixins.CreateModelMixin,
     serializer_class = UserSerializer
     permission_classes = (IsAdminUser,)
 
-
+# Все основные запросы к комментариям
 class CommentsViewSet(mixins.CreateModelMixin,
                       mixins.RetrieveModelMixin,
                       mixins.UpdateModelMixin,

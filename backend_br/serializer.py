@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from .models import *
 
-
+# Сериализаторы, которые преобразуют переменные python в json и обратно
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts

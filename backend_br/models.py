@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 
 from django.db import models
 
-
+# БД на ORM
 class Categories(models.Model):
     name = models.CharField(max_length=100)
     color = models.TextField()

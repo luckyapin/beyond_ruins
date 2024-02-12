@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Секретный ключ лежит в основной папке, но в гите его нет (.gitignore)
 SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -19,7 +20,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Приложения в проекте
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +47,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
-
+# Откуда можно принимать запросы
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://127.0.0.1:3000",
@@ -55,22 +56,23 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 ROOT_URLCONF = 'beyond_ruins.urls'
-
+# Настройки REST_FRAMEWORK
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # Пагинация
     'Page_size': 10,
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': [  # Стандартный класс ограничений
         'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [  # Классы аутентификации
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
 }
 
+# Настроки JWT токенов
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=365),
@@ -134,7 +136,7 @@ WSGI_APPLICATION = 'beyond_ruins.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Натсройка ДБ
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
