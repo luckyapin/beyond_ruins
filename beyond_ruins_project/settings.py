@@ -57,7 +57,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
 ]
 
-ROOT_URLCONF = 'beyond_ruins.urls'
+ROOT_URLCONF = 'beyond_ruins_project.urls'
 # Настройки REST_FRAMEWORK
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # Пагинация
@@ -133,7 +133,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'beyond_ruins.wsgi.application'
+WSGI_APPLICATION = 'beyond_ruins_project.wsgi.application'
 
 
 # Database

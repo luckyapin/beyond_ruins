@@ -63,7 +63,6 @@ class UserViewSet(mixins.CreateModelMixin,
                        'updateTime': i.updateTime,
                        'userId': i.userId.pk,
                        'categoryId': i.categoryId.pk,
-
                        }
         return Response(j)
 
