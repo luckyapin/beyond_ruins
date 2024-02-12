@@ -39,7 +39,6 @@ class PostsViewSet(mixins.CreateModelMixin,
         post = Posts.objects.filter(pk=pk)
         return Response({
             'name': post[0].categoryId.name,
-            'color': post[0].categoryId.color,
         })
 
 # Обработка всех основных запросов к User + вывод всех постов 1 пользователя

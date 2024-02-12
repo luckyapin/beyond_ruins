@@ -5,7 +5,6 @@ from django.db import models
 # БД на ORM
 class Categories(models.Model):
     name = models.CharField(max_length=100)
-    color = models.TextField()
 
     def __str__(self):
         return self.name
