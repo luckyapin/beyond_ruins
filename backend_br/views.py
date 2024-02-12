@@ -70,7 +70,7 @@ class UserViewSet(mixins.CreateModelMixin,
 
     @action(methods=['get'], detail=False)  # Профиль, отправившего токен
     def profile(self, request):
-       return Response(request.user.pk)
+        return Response(request.user.pk)
 
 # Все основные запросы к Категориям
 class CategoriesViewSet(mixins.CreateModelMixin,
@@ -79,7 +79,7 @@ class CategoriesViewSet(mixins.CreateModelMixin,
                         mixins.ListModelMixin,
                         GenericViewSet):
     queryset = Categories.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CategoriesSerializer
     permission_classes = (IsAdminUser,)
 
 # Все основные запросы к комментариям
@@ -89,5 +89,5 @@ class CommentsViewSet(mixins.CreateModelMixin,
                       mixins.ListModelMixin,
                       GenericViewSet):
     queryset = Comments.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CommentsSerializer
     permission_classes = (MyPermission,)
