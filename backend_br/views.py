@@ -16,6 +16,7 @@ class PostsViewSet(mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin,
                    mixins.UpdateModelMixin,
                    mixins.ListModelMixin,
+                   mixins.DestroyModelMixin,
                    GenericViewSet):
     queryset = Posts.objects.all()
     serializer_class = PostsSerializer
@@ -46,6 +47,7 @@ class UserViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.ListModelMixin,
+                  mixins.DestroyModelMixin,
                   GenericViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
@@ -75,6 +77,7 @@ class CategoriesViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.ListModelMixin,
+                        mixins.DestroyModelMixin,
                         GenericViewSet):
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
@@ -85,6 +88,7 @@ class CommentsViewSet(mixins.CreateModelMixin,
                       mixins.RetrieveModelMixin,
                       mixins.UpdateModelMixin,
                       mixins.ListModelMixin,
+                      mixins.DestroyModelMixin,
                       GenericViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
