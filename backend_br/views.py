@@ -30,7 +30,7 @@ class PostsViewSet(mixins.CreateModelMixin,
                        'creationTime': i.creationTime,
                        'userId': str(i.userId.pk),
                        'postId': pk,
-                       'login': i.userId.login
+                       'username': i.userId.username
                        }
         return Response(j)
 
