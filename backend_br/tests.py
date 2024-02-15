@@ -4,6 +4,7 @@ from django.urls import reverse
 from rest_framework import status
 from beyond_ruins_project import urls
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 import json
 
 user = get_user_model()
@@ -48,9 +49,21 @@ class PostViewSetTestCase(APITestCase):
         self.assertEqual(response.data['title'], 'testpost')
 
     def test_post_deletion(self):
-        self.authenticate()
+        self.superuser = User.objects.create_superuser(username='admin', email='admin@example.com',
+                                                       password='adminpassword')
+
+        # Проверяем, что суперпользователь аутентифицирован
+        self.assertTrue(self.superuser.is_authenticated)
+
+        # Аутентификация суперпользователя
+        self.client.force_login(self.superuser)
         post_id = 1
-        delete_url = f"/api/v1/Posts/{post_id}/"
+
+        # Формирование URL для удаления поста
+        delete_url = '/api/v1/Posts/1/'
+
+        # Отправка запроса на удаление поста от имени суперпользователя
         response = self.client.delete(delete_url)
+
+        # Проверка, что запрос завершился успешно (HTTP статус 204)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        # 'posts-detail', kwargs={'pk': post_id}

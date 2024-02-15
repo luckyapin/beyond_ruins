@@ -5,7 +5,7 @@ from rest_framework import routers
 
 from backend_br.views import *
 
-# Роутеры, которые создают марщруты для запросов
+# Роутеры, которые создают маршруты для запросов
 router_posts = routers.DefaultRouter()
 router_posts.register(f'Posts', PostsViewSet, basename='posts')
 
