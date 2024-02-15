@@ -29,9 +29,9 @@ class PostsViewSet(mixins.CreateModelMixin,
         for i in coms:
             j[i.pk] = {'commentText': i.commentText,
                        'creationTime': i.creationTime,
-                       'userId': i.userId.pk,
+                       'userId': i.userId.pk if i.userId is not None else None,
                        'postId': int(pk),
-                       'username': i.userId.username
+                       'username': i.userId.username if i.userId is not None else None
                        }
         return Response(j)
 
@@ -39,7 +39,7 @@ class PostsViewSet(mixins.CreateModelMixin,
     def category(self, request, pk):
         post = Posts.objects.filter(pk=pk)
         return Response({
-            'name': post[0].categoryId.name,
+            'name': post[0].categoryId.name if post[0].categoryId is not None else None,
         })
 
 # Обработка всех основных запросов к User + вывод всех постов 1 пользователя
@@ -63,9 +63,11 @@ class UserViewSet(mixins.CreateModelMixin,
                        'text': i.text,
                        'creationTime': i.creationTime,
                        'updateTime': i.updateTime,
-                       'userId': i.userId.pk,
-                       'categoryId': i.categoryId.pk,
+                       'userId': i.userId.pk if i.userId is not None else None,
+                       'categoryId': i.categoryId.pk if i.categoryId is not None else None,
                        }
+
+
         return Response(j)
 
     @action(methods=['get'], detail=False)  # Профиль, отправившего токен
